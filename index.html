@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- load in the p5 core library -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- load bootstrap core library-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- your custom sketch code -->
+    <script src="sketch.js"></script>
+
+    <!-- custom CSS styles for this page -->
+    <style>
+      @font-face{
+        font-family: RalewayRegular;
+        src: url('../fonts/Raleway-Regular.ttf');
+      }
+      @font-face{
+        font-family: RalewaySBT;
+        src: url('../fonts/Raleway-SemiBoldItalic.ttf');
+      }
+      @font-face{
+        font-family: PeopleBook;
+        src: url('../fonts/peoplebook.otf');
+      }
+      body {
+        background-color: black;
+      }
+      #welcomePage {
+        background-color: #285c18;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+      }
+      #title {
+        max-width: 800px;
+        margin: auto;
+        display: block;
+        padding: 20px;
+      }
+      #cover_image {
+        margin: auto;
+        display: block;
+        max-width: 800px;
+        margin: 20px;
+      }
+
+      #button_start {
+        color: whitesmoke;
+        background-color: #ff5100;
+        font-family: RalewayRegular;
+        font-size: 24pt;
+        width: 200px;
+        height: 80px;
+        text-align: center;
+        margin: auto;
+        display: block;
+        border: none;
+        border-radius: 10px;
+
+      }
+      #button_start:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+        transform-origin: center;
+        font-family: RalwaySBT;
+      }
+      #carouselContainer {
+        background-color: #285c18;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+      }
+      #songList {
+        width: 70vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      img {
+        border-radius: 25px;
+      }
+
+      .songs {
+        color: whitesmoke;
+        background-color: #ff5100;
+        font-family: RalewayRegular;
+        font-size: 16pt;
+        width: 220px;
+        height: 60px;
+        text-align: center;
+        margin: auto;
+        display: block;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .songs:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+        transform-origin: center;
+        font-family: RalwaySBT;
+      }
+      #cnvContainer {
+        background-color: rgba(255, 255, 255, 0.5);
+        margin: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      #instructions {
+        font-family: RalewayRegular;
+        margin-left: 15px;
+      }
+      #part1 {
+        margin-top: 10px;
+        margin-bottom: 60px;
+        line-height: 2;
+      }
+      #part2 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        max-width: 255px;
+        line-height: 2;
+      }
+      #part3 {
+        margin-top: 150px;
+      }
+      #wrap {
+        background-color: #285c18;
+        display: none;
+        flex-direction: row;
+        width: 100vw;
+        height: 100vh;
+      }
+      .btn:hover {
+        color: white;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="welcomePage">
+
+      <div id="title"> 
+        <img id="cover_image" src="images/title.png" width="auto" height="auto">
+        <button id="button_start">Start!</button> </div>
+    </div>
+
+    <div id="carouselContainer">
+      <div id="songList">
+        <div id="carouselExampleCaptions" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/3.png" class="d-block w-100" alt="song#1">
+              <div class="carousel-caption d-none d-md-block">
+                <button id="s1" class="songs" onClick="selectMusic5()">Start Adventure 1</button>
+                
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/2.png" class="d-block w-100" alt="song#2">
+              <div class="carousel-caption d-none d-md-block">
+                <button id="s2" class="songs" onClick="selectMusic2()">Start Adventure 2</button>
+                
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/1.png" class="d-block w-100" alt="song#3">
+              <div class="carousel-caption d-none d-md-block">
+                <button id="s3" class="songs" onClick="selectMusic7()">Start Adventure 3</button>
+                
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="wrap">
+      <div id="cnvContainer">
+        <div id="instructions">
+          <div id="part1">
+            <h5 style="font-family: RalewaySBT;">Instructions</h5>
+            <hr>
+            <i class="bi bi-arrow-left-square-fill"></i> Press 'J' to hit left lane<br>
+            <i class="bi bi-arrow-up-square-fill"></i> Press 'k' to hit the middle lane<br>
+            <i class="bi bi-arrow-right-square-fill"></i> Press 'L' to hit the right lane<br>
+            <i class="bi bi-aspect-ratio-fill"></i> Press 'Space' to start the game<br>
+          </div>
+          <div id="part2">
+            <h5 style="font-family: RalewaySBT;">Rule: Rhythm Combo Mastery</h5>
+            <hr>
+            <p>In the rhythm adventure, players must hit the notes with precise 
+              timing to the beat of the music. As the notes come across 
+              the screen, which is seen as monsters, players should tap following 
+              the beat of note encountered. </p>
+          </div>
+          <div id="part3">
+            <i class="btn bi bi-house" id="button_home"> Home Page</i><br>
+            <i class="btn bi bi-skip-backward" id="button_restart">  Switch Songs</i><br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let check = 0;
+
+      document.getElementById('button_start').onclick = function() {
+        check = 0;
+        let welcomePage = document.getElementById('welcomePage');
+        let songList = document.getElementById('carouselContainer');
+        welcomePage.style.opacity = 1;
+        
+        setInterval(() => {
+          let screenOpacity = welcomePage.style.opacity;
+          if (check == 0 && screenOpacity > 0) {
+            screenOpacity -= 0.1;
+            welcomePage.style.opacity = screenOpacity;
+          }
+        }, 30);
+        
+        setTimeout(() => {
+          welcomePage.style.display = 'none';
+          songList.style.display = 'block';
+          check = 1;
+        }, 600);
+      }
+
+      let selectSong = document.querySelectorAll('.songs');
+      for (let i = 0; i < selectSong.length; i++) {
+        selectSong[i].addEventListener('click', function() {
+          document.getElementById('wrap').style.display = 'flex';
+          window.scrollTo(0, 2000);
+          setTimeout(() => {
+            document.getElementById('carouselContainer').style.display = 'none';
+          }, 1000);
+        })
+      }
+
+      document.getElementById('button_restart').onclick = function() {
+        document.getElementById('carouselContainer').style.display = 'block';
+        document.getElementById('wrap').style.display = 'none';
+        gameStop();
+      }
+
+      document.getElementById('button_home').onclick = function() {
+        document.getElementById('welcomePage').style.display = 'flex';
+        document.getElementById('welcomePage').style.opacity = 1;
+        document.getElementById('wrap').style.display = 'none';
+        gameStop();
+      }
+    </script>
+  </body>
+</html>
